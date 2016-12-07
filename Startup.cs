@@ -5,7 +5,7 @@ using Nancy.Owin;
 using Nancy;
 using Nancy.ViewEngines.Razor;
 
-namespace TEMPLATE
+namespace BestRestaurants
 {
   public class Startup
   {
@@ -43,6 +43,6 @@ namespace TEMPLATE
 
   public static class DBConfiguration
   {
-      public static string ConnectionString = "Data Source=(localdb)\\mssqllocaldb;Initial Catalog=todo;Integrated Security=SSPI;";
+      public static string ConnectionString = "Data Source=(localdb)\\mssqllocaldb;Initial Catalog=best_restaurants;Integrated Security=SSPI;";
   }
 }
