@@ -13,6 +13,7 @@ namespace  BestRestaurants
     {
       DBConfiguration.ConnectionString = "Data Source=(localdb)\\mssqllocaldb;Initial Catalog=best_restaurants_test;Integrated Security=SSPI;";
     }
+
     [Fact]
     public void Equal_CuisinesAreTheSame_true()
     {
@@ -27,11 +28,28 @@ namespace  BestRestaurants
 
       Assert.Equal(0, allCuisines.Count);
     }
-    
+
+    [Fact]
+    public void GetRestaurants_ReturnsAllRestaurantsForCuisine_true()
+    {
+      Cuisine selectedCuisine = new Cuisine("Thai");
+      List<Restaurant> tempRestaurants  = new List<Restaurant>{};
+
+      Restaurant restaurant1 = new Restaurant("Thai Square", 0);
+      restaurant1.Save();
+      tempRestaurants.Add(restaurant1);
+      Restaurant restaurant2 = new Restaurant("Chaba Thai", 0);
+      restaurant2.Save();
+      tempRestaurants.Add(restaurant2);
+
+      List<Restaurant> cuisineRestaurants = selectedCuisine.GetRestaurants();
+      Assert.Equal(tempRestaurants, cuisineRestaurants);
+    }
+
     public void Dispose()
     {
       Cuisine.DeleteAll();
+      Restaurant.DeleteAll();
     }
-
   }
 }

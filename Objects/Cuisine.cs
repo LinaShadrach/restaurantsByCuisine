@@ -63,6 +63,44 @@ namespace BestRestaurants.Objects
       return allCuisines;
     }
 
+    public List<Restaurant> GetRestaurants()
+    {
+      List<Restaurant> selectedRestaurants = new List<Restaurant>{};
+
+      SqlConnection conn = DB.Connection();
+      conn. Open();
+
+      SqlCommand cmd = new SqlCommand("SELECT * from restaurants WHERE cuisine_id = @CuisineId;", conn);
+      SqlParameter cuisineIdParameter = new SqlParameter();
+      cuisineIdParameter.ParameterName = "@CuisineId";
+      cuisineIdParameter.Value = this.Id;
+
+      cmd.Parameters.Add(cuisineIdParameter);
+
+      SqlDataReader rdr = cmd.ExecuteReader();
+
+      int foundRestaurantId = 0;
+      string foundRestaurantName = null;
+      int foundRestaurantCuisineId = 0;
+
+      while(rdr.Read())
+      {
+        foundRestaurantId = rdr.GetInt32(0);
+        foundRestaurantName = rdr.GetString(1);
+        foundRestaurantCuisineId = rdr.GetInt32(2);
+        Restaurant newRestaurant = new Restaurant(foundRestaurantName, foundRestaurantCuisineId, foundRestaurantId);
+        selectedRestaurants.Add(newRestaurant);
+      }
+      if(rdr != null)
+      {
+        rdr.Close();
+      }
+      if(conn != null)
+      {
+        conn.Close();
+      }
+      return selectedRestaurants;
+    }
 
     public static void DeleteAll()
     {

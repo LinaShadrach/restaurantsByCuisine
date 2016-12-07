@@ -1,11 +1,11 @@
-# _Resaurant Search_
+# _Restaurant Search_
 
-#### _Short Description._
+#### _Enables the user to add their favorite restaurants by the type of cuisine they offer._
 
 #### By _**Lina Shadrach and Anne Belka**_
 
 ## Description
-_A Resaurant App_
+_A Restaurant App that lets a user add a restaurant by cuisine. The user is also able to edit and delete individual restaurants._
 
 ## Specs
 #### 1. _The program allows a user to enter a restaurant and cuisine type and the program saves to database._
@@ -21,7 +21,7 @@ _A Resaurant App_
 
 ## Setup/Installation Requirements
 
-* _Download the repository [here](https://github.com/LinaShadrach/AddressBookInd.git "Lina's Address Book"). Run on Windows with Powershell. In powershell, navigate into the repository directory and use command >dnx kestrel to run. Open up any browser window and enter localhost:5004 into URL search bar._
+* _Download the repository [here](https://github.com/LinaShadrach/AddressBookInd.git ). Run on Windows with Powershell. In powershell, navigate into the repository directory and use command >dnx kestrel to run. Open up any browser window and enter localhost:5004 into URL search bar._
 
 ## Known Bugs
 

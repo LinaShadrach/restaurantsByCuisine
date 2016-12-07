@@ -97,9 +97,6 @@ namespace BestRestaurants.Objects
       cmd.Parameters.Add(restaurantIdParameter);
 
       SqlDataReader rdr = cmd.ExecuteReader();
-      // int editId = 0;
-      // string editName = null;
-      // int editCuisineId = 0;
 
       while(rdr.Read())
       {
@@ -108,7 +105,6 @@ namespace BestRestaurants.Objects
         Console.WriteLine(this.Name);
         this.CuisineId = rdr.GetInt32(2);
       }
-      // Restaurant edittedRestaurant = new Restaurant(editName, editCuisineId, editId);
       if (rdr != null)
       {
         rdr.Close();
@@ -118,7 +114,6 @@ namespace BestRestaurants.Objects
         conn.Close();
       }
 
-      // return edittedRestaurant;
 
     }
     public static List<Restaurant> GetAll()
