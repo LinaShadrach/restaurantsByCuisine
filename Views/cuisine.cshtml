@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="/Content/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/Content/css/styles.css" rel="stylesheet" type="text/css">
+    <title>Best Restaurants</title>
+  </head>
+  <body>
+    <div class="jumbotron">
+      <h1>Best Restaurants</h1>
+    </div>
+    <div class="container">
+      <h2>These restaurants serve @Model[0] Food:</h2><br>
+      <ul>
+        @foreach(var restaurant in Model[1])
+        {
+            <li>@restaurant.Name</li>
+        }
+      </ul>
+
+      <h5><a href="/restaurant/new">Add a restaurant</a></h5><br>
+      <h5><a href="/">Home</a></h5><br>
+
+    </div>
+  </body>
+</html>

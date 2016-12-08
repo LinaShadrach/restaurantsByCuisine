@@ -9,7 +9,6 @@ namespace BestRestaurants.Objects
     // where TEMPLATE_OBJECTId references a property of the object
     public string Type {get; set;}
     public int Id {get; set;}
-    // private List<string> TEMPLATE = new List<string> {};
 
     public Cuisine(string Type, int id = 0)
     {
@@ -34,7 +33,34 @@ namespace BestRestaurants.Objects
     {
          return this.Type.GetHashCode();
     }
+    public void Save()
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
 
+      SqlCommand cmd = new SqlCommand("INSERT INTO cuisines(type) OUTPUT INSERTED.id VALUES (@CuisineType);", conn);
+
+      SqlParameter nameParameter = new SqlParameter();
+      nameParameter.ParameterName = "@CuisineType";
+      nameParameter.Value = this.Type;
+
+      cmd.Parameters.Add(nameParameter);
+
+      SqlDataReader rdr = cmd.ExecuteReader();
+
+      while(rdr.Read())
+      {
+        this.Id = rdr.GetInt32(0);
+      }
+      if(rdr != null)
+      {
+        rdr.Close();
+      }
+      if(conn != null)
+      {
+        conn.Close();
+      }
+    }
     public static List<Cuisine> GetAll()
     {
       List<Cuisine> allCuisines = new List<Cuisine>{};
@@ -62,7 +88,40 @@ namespace BestRestaurants.Objects
       }
       return allCuisines;
     }
+    public static Cuisine Find(int cuisineId)
+    {
+      SqlConnection conn = DB.Connection();
+      conn. Open();
 
+      SqlCommand cmd = new SqlCommand("SELECT * from cuisines WHERE id = @CuisineId;", conn);
+      SqlParameter cuisineIdParameter = new SqlParameter();
+      cuisineIdParameter.ParameterName = "@CuisineId";
+      cuisineIdParameter.Value = cuisineId;
+
+      cmd.Parameters.Add(cuisineIdParameter);
+
+      SqlDataReader rdr = cmd.ExecuteReader();
+
+      int foundCuisineId = 0;
+      string foundCuisineType = null;
+
+      while(rdr.Read())
+      {
+        foundCuisineId = rdr.GetInt32(0);
+        foundCuisineType = rdr.GetString(1);
+      }
+      Cuisine foundCuisine = new Cuisine(foundCuisineType, foundCuisineId);
+
+      if(rdr != null)
+      {
+        rdr.Close();
+      }
+      if(conn != null)
+      {
+        conn.Close();
+      }
+      return foundCuisine;
+    }
     public List<Restaurant> GetRestaurants()
     {
       List<Restaurant> selectedRestaurants = new List<Restaurant>{};

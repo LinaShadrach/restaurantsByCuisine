@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="/Content/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/Content/css/styles.css" rel="stylesheet" type="text/css">
+    <title>Best Restaurants</title>
+  </head>
+  <body>
+    <div class="jumbotron">
+      <h1>Best Restaurants</h1>
+    </div>
+    <div class="container">
+      <h2>Add a favorite restaurant here:</h2><br>
+
+        <form action="/restaurant/new" method="post">
+          <label for="name">Enter a restaurant name:</label>
+          <input type="text" name="name">
+
+          <select  name="type">
+            @foreach(var cuisine in Model)
+            {
+              <option value=@cuisine.Id> @cuisine.Type </option>
+            }
+          </select>
+
+          <button type="submit">Add</button>
+        </form>
+      <h5><a href="/">Home</a></h5><br>
+    </div>
+  </body>
+</html>

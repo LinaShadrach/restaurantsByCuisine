@@ -21,6 +21,7 @@ namespace  BestRestaurants
       Cuisine otherCuisine = new Cuisine("Cajun");
       Assert.Equal(newCuisine, otherCuisine);
     }
+
     [Fact]
     public void GetAll_TableIsEmptyAtFirst()
     {
@@ -28,7 +29,14 @@ namespace  BestRestaurants
 
       Assert.Equal(0, allCuisines.Count);
     }
-
+    [Fact]
+    public void Find_ReturnsCuisineById_true()
+    {
+      Cuisine newCuisine = new Cuisine("Cajun");
+      newCuisine.Save();
+      Cuisine testCuisine = Cuisine.Find(newCuisine.Id);
+      Assert.Equal(newCuisine, testCuisine);
+    }
     [Fact]
     public void GetRestaurants_ReturnsAllRestaurantsForCuisine_true()
     {
